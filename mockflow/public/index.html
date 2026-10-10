@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockFlow — Instant Mock APIs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#09090b',
+                        card: '#18181b',
+                        border: '#27272a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-zinc-300 font-sans antialiased min-h-screen selection:bg-indigo-500/30">
+    
+    <!-- Navbar -->
+    <nav class="border-b border-border bg-black/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded bg-gradient-to-br from-indigo-500 to-cyan-400 shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
+                <span class="font-bold text-white text-lg tracking-wide">MockFlow</span>
+                <span class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider border border-border bg-card px-2 py-0.5 rounded-full ml-2">MVP</span>
+            </div>
+            <div class="flex items-center gap-2 bg-card border border-border px-3 py-1.5 rounded-full">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span class="text-xs text-zinc-300 font-medium tracking-wide">System Live</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <h1 class="text-3xl font-bold text-white mb-2">API Dashboard</h1>
+                <p class="text-zinc-400 text-sm">Create an endpoint, then call <code class="text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-1.5 py-0.5 rounded font-mono text-xs">/mock/&lt;route&gt;</code> from anywhere. Use <code class="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded font-mono text-xs">users/:id</code> for params.</p>
+            </div>
+            <button class="bg-white text-black hover:bg-zinc-200 px-5 py-2.5 rounded-md font-semibold text-sm transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] flex items-center gap-2">
+                <span>+</span> New API
+            </button>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+            <div class="bg-card border border-border rounded-xl p-5 hover:border-zinc-700 transition-colors">
+                <div class="text-zinc-500 text-xs font-semibold uppercase tracking-wider mb-2">Total Endpoints</div>
+                <div class="text-4xl font-bold text-white">0</div>
+            </div>
+            <div class="bg-card border border-border rounded-xl p-5 hover:border-zinc-700 transition-colors">
+                <div class="text-zinc-500 text-xs font-semibold uppercase tracking-wider mb-2">GET Requests</div>
+                <div class="text-4xl font-bold text-emerald-400">0</div>
+            </div>
+            <div class="bg-card border border-border rounded-xl p-5 hover:border-zinc-700 transition-colors">
+                <div class="text-zinc-500 text-xs font-semibold uppercase tracking-wider mb-2">Total Requests Served</div>
+                <div class="text-4xl font-bold text-blue-400">0</div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="bg-card border border-border rounded-xl overflow-hidden shadow-2xl shadow-black/50">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-black/40 border-b border-border text-zinc-400 text-xs uppercase tracking-wider">
+                    <tr>
+                        <th class="px-6 py-4 font-semibold">Method</th>
+                        <th class="px-6 py-4 font-semibold">Endpoint</th>
+                        <th class="px-6 py-4 font-semibold">Status</th>
+                        <th class="px-6 py-4 font-semibold">Response Preview</th>
+                        <th class="px-6 py-4 font-semibold">Hits</th>
+                        <th class="px-6 py-4 font-semibold text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                    <!-- Empty State -->
+                    <tr>
+                        <td colspan="6" class="px-6 py-16 text-center">
+                            <div class="text-zinc-500 mb-2">No APIs created yet.</div>
+                            <div class="text-zinc-600 text-xs">Click "+ New API" to generate your first mock endpoint.</div>
+                        </td>
+                    </tr>
+                    
+                    <!-- DUMMY ROW (Uncomment to see how populated rows look) -->
+                    <!--
+                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                        <td class="px-6 py-4"><span class="text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2.5 py-1 rounded-md text-xs font-bold font-mono">GET</span></td>
+                        <td class="px-6 py-4 text-zinc-200 font-mono text-xs">/mock/users</td>
+                        <td class="px-6 py-4"><span class="text-zinc-300 bg-zinc-800 border border-zinc-700 px-2.5 py-1 rounded-md text-xs font-mono">200 OK</span></td>
+                        <td class="px-6 py-4 text-zinc-500 font-mono text-xs truncate max-w-[200px]">{"data": [{"id": 1}]}</td>
+                        <td class="px-6 py-4 text-zinc-300 font-mono text-xs">142</td>
+                        <td class="px-6 py-4 text-right">
+                            <button class="text-zinc-500 hover:text-red-400 transition-colors text-xs font-medium opacity-0 group-hover:opacity-100">Delete</button>
+                        </td>
+                    </tr>
+                    -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>
